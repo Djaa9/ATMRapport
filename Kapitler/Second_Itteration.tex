@@ -1,0 +1,44 @@
+\thispagestyle{fancy}
+\chapter{Anden itteration}
+\label{chp:seconditteration}
+Efter at første itteration var færdig blev et nyt sæt af krav til systemet præsenteret. På den baggrund blev systemets design opdateret således at det bedre ville kunne udviddes i fremtiden med flere ændringer af samme slags. 
+
+\section{Design og implementering}
+De nye krav dikterede at systemet skulle opsættes ved hjælp af en 
+
+\figur{sd_timer_elapsed}{Sekvensdiagram for ATM.\_ticktimer\_Elapsed kald}{fig:sd_timer_elapsed}{1}
+
+*RegionElements
+*Configfile
+*IEvents
+*EventDetectors
+
+\section{Unittest}
+\subsection{ATM}
+\subsection{TrackHandler}
+\subsection{RegionEventDetector}
+\subsection{EventDetectors}
+\subsection{Events}
+\subsection{Excluded code}
+
+\section{Integrationstest}
+
+
+%
+%\section{Teststrategi}
+%Gruppen valgte at enhedsteste hver metode så snart den var blevet skrevet. Dette sikrede for det første, at der let kunne holde en coverage nær 100\%, da der blot blev sørget for at få fuld coverage hver eneste gang en ny metode var oprettet. Dette gav en god sikkerhedsfølelse da man da altid kunne stole på, at enhederne virkede i en individuel sammenhæng, og at der derfor ikke var langt til en fungerende integration.  Det gav samtidig en rigtig god afveksling mellem udvikling og test, så arbejdet ikke blev for monotomt. 
+%Da enhederne i bunden af hierakiet var blevet testet, påbegyndte vi integrationstest nedefra og op, og til sidst blev hele systemet testet i en afsluttende "big bang" integration.
+%
+%\subsection{Enhedstest}
+%Alle enhedstests blev så vidt muligt konstrueret ved hjælp af isolation frameworket NSubstitute, og testet i Unit-test frameworket NUnit. 
+%NSubstitute hjalp os til hurtigt at skrive gode, isolerede unittests. Ulempen ved at bruge et isolation framework var, at man hurtigt glemte om man kodede til en stub eller en mock, fordi det med frameworket var det samme. Vi kom derfor let til at bruge mange mocktests, selvom nogle testcases måske godt kunne være klaret med en stubtest. 
+%Under udviklingen af unittests kom gruppen også let til at fokusere udelukkende på coverage. Vi oplevede flere gange at måtte gå tilbage og revurdere tests, fordi de reelt set ikke testede det vi ønskede, på trods af at de havde fuld coverage. Dette var vigtig læring, da man ellers hurtigt kunne stirre sig blind på coverage. 
+%
+%\subsection{Integrationstest}
+%Den primære strategi for integrationstest var som nævnt tidligere bottom-op. Vi startede med at teste de nedre klasser i hierakiet, for derefter at bevæge os opad. De nederste klasser gav en del udfordringer, da det kan være rigtig svært at teste systemets afhængigheder til styresystemet osv. Dette gjorde det blandt andet svært for os at teste output til konsollen, som praktisk talt er umuligt med mindre man intercepter en stream. Problemet ved intercepte en stream er, at man da vil skulle teste i uendelighed, da man da også skal teste sin interception osv. Output til filer blev testet ved at skrive til en fil, læse filen ind igen, for så at sammenligne om det rent faktisk var blevet tilføjet til filen. Efterhånden som vi bevægede os højere op i hierakiet, blev det lettere for os at lave integrationstests, da vi da bedre selv kunne styre afhængighederne.
+%Da der var blevet integrationstestet hele vejen op istedet for blot at gøre brug af en big bang test, havde vi en klar formodning om, at systemet ville virke som forventet, hvilket det også gjorde.
+%
+%\section{Test som support ved ændrede krav}
+%De ændrede krav resulterede i, at en række tests skulle skrives om. Nogle få af vores ændrede cases kunne være undgået med et bedre design, men langt de fleste ville være nødvendige uanset designet. 
+%De ændrede krav betød også at en række constructors i vores klasser skulle skrives om. Her oplevede vi virkelig hvordan en setup metode kan være en fordel, da vi her blot skulle ændre ét sted, hvorefter alle vores tests var opdateret til at supportere de nye ændringer.
+%De nye ændringer krævede naturligvis også en række nye testcases, hvilket hurtigt blev tilføjet til projektet. 

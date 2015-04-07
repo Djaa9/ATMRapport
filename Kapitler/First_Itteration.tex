@@ -1,0 +1,42 @@
+\thispagestyle{fancy}
+\chapter{Første itteration}
+\label{chp:FirstItteration}
+
+\section{Design og implementering}
+
+\figur{sd_tick_firstitteration}{Sekvensdiagram for ATM.Tick kald}{fig:sd_tick_first}{1}
+
+Første itteration af ATM systemet havde en klasse kaldet ATM. ATM klassen havde to metoder; Tick og AddTrack. AddTrack tog en Liste af Tracks som parameter og tilføjede disse Tracks til listen af Tracks som ATM klassen skulle håndtere. 
+
+Et objekt af ATM blev oprettet sammen med en Timer i programmets main metode. Timeren blev sat til et interval på 250ms med en delegate som kaldte Tick hver gang Timeren udløb. Implementeringen af Tick metoden kan ses som et sekvensdiagram i figur \ref{fig:sd_tick_first}. Figuren viser hvordan at Tick Kalder UpdatePositions i TrackHandler med listen af vores tracks. UpdatePositions opdatere Tracksenes position baseret på hastighed, position og tidspunkt. Herefter sender Tick den opdaterede liste til RegionHandleren ved at kalde metodens UpdateRegion metode. UpdateRegion identificerer, håndterer og logger events ved hjælp af EventLoggeren. EventLoggeren har en metode for hver type af event som skal logges.
+
+SOLID principperne er tænkt med i designet således at en ny implementering af ITrackHandleren, IRegionHandleren og IEventLogger kan injectes hvis implementeringen skal ændres. ATM'en burde således være åben for ny implementering af håndtering af tracks og region uden at skulle modificeres.
+
+\section{Test}
+Der blev kun skrevet ganske få test i den første itteration inden at kravene til systemet blev opdateret. Nogle få testmetoder blev skrevet som testede for korrekt håndtering af null parametre ved nogle metodekald.
+
+
+%\part{\section{Overvejlser}
+%I udarbejdelsen af designet har SOLID principperne været i fokus. Herunder har specielt Single Responsibility haft stor indfyldelse for at skabe software, som var nemt at unit teste. Dette er gjort med et ønske om at skabe en skarp ansvarsfordeling således at unit testene ville være selvforklarende og præcise.
+%
+%Herudover har Open/Closed prinippet været vigtige i overvejelserne, da det allerede fra start var annonceret, at der ville komme ændringer til kravene. Der er således forsøgt at lave et design, hvor der nemt kunne tilføjes nye funktioner uden at ændre i allerede skrevet kode. Der er derfor kodet til interfaces istedet for til specifikke klasser for at gøre klasseudskiftning og samtidig også testning lettere.
+%
+%
+%
+%\section{Implementering}
+%
+%I den endelige implementering, som ses i figur \ref{fig:klassediagagram}, blev der valgt en klar opdeling mellem udskrivning af output og  håndtering af tracks og relevante events. Dette blev opbygget med en OutputControl og en RegionControl. OutputControl håndterer at skrive både til konsol og fil. 
+%RegionControl har en liste af ITracks og IEventDetectors således, at listen af ITracks ved hvert ticks sendes  til de forskellige EventDetectors, som behandler tracks i forhold til deres event. De respektive Events ved ligeledes selv, hvordan de skal udskrives.
+%
+%\figur{AirTrafficControlSystem_v3}{UML Klassediagram}{fig:klassediagagram}{1} 
+%
+%
+%\section{Håndtering af kravændringer}
+%Overordnet gjorde en grundig brug af OCP det simpelt at tilføje de nye krav til projektet. 
+%
+%En klar opdeling af events og detektorer gjorde det simpelt at tilføje en AirportDetector samt AiportEvent, som kunne håndtere den nye type af events.
+%
+%Ligeledes blev konfigurationsfilens parameter blot sendt med som constructorparameter til de respektive klasser, og dette kunne ligeledes gøres med minimale ændringer. NearMissRadious var valgt hard coded i NearMissDetector, og ændringer af dette krævede kun mindre ændringer i allerede skrevet kode.
+%
+%Overordnet vurderes der derfor en god balance mellem arbejdsmængden og hvor generisk softwaren var, da de nye krav skulle tilføjes.
+%}
