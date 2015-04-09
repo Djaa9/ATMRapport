@@ -25,11 +25,16 @@ unit hest
 \subsection{RegionEventDetector}
 \todo[inline]{Johnny}
 \subsection{EventDetectors}
-\todo[inline]{Kim}
+EventsDectors klasserne er testet med forskellige senarier og har været med til at finde fejl i vores implementering. Så det er test der har givet os et godt udbytte. Vi har dog erkendt at vi burde have implementeret beregningen af afstanden mellem de forskellige regionselemeter i en særskilt klasse således at den kun skal testes et sted. Implementeringen i dag gør det rigtig svært at test selve afstands beregningen og det giver også mange ens unit test da vi skal teste den i 5 events detektor klasser. Ved at have beregningen i en klasse for sig selv kan vi påvirke vores unit test af detektor klasserne med en Stub af beregningsklassen og derved bestemme hvornår der skal generes events.
+
 \subsection{Events}
-\todo[inline]{Kim}
+Event klasserne er godt afgrænsede og de har samme interfaces hvilket gør det let at teste dem. De initialiseres med fakes der benyttes som en Mock og Stub. Mocks hjælper med at teste at det er de rigtige værdier der bliver udskrevet samt at de rigtige funktioner bliver kaldt og kun kaldt det antal gange som det er tiltænkt. Der er ingen grænseværdier der skal teste.
+
 \subsection{Excluded code}
-\todo[inline]{Kim}
+Det kan nogle gange give god mening at ekskludere kode i covers analyse. Hvis det er tilladt ikke at skulle opnå 100 \% coveres er det svært at overskue hvor der ikke testes og er det så 90 eller 60 \% der ok? Vi har den opfattelse at alle linjer kode skal unit testes og hvis der er noget som ikke giver mening at tage med i analysen skal det ekskluderes fra analysen og begrundes hvorfor det er i orden.
+WriteOutput klasserne som skriver til konsollen, logfilen eller begge er ekskluderet fra unit test og coveres analysen da de skal testes ved integration test og derved se at der skrives til filen eller i konsollen. 
+RegionsElements er også ekskluderet da det er get og set funktioner der kan testes, men dette har vi valgt ikke at gøre.
+
 \section{Integrationstest}
 \todo[inline]{Johnny}
 
