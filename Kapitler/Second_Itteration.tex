@@ -4,27 +4,25 @@
 Efter at første itteration var færdig blev et nyt sæt af krav til systemet præsenteret. På den baggrund blev systemets design opdateret således at det bedre ville kunne udviddes i fremtiden med flere ændringer af samme slags. 
 
 \section{Design og implementering}
-De nye krav dikterede at systemet skulle opsættes ved hjælp af en konfigurationsfil som skulle indlæses når systemet startede. Det er således nødvendigt at opsætte og håndtere timeren fra ATM klassen. Ved hjælp af en Config klasse indlæses konfigurationsfilen og indholdet valideres. Konfigurations parametrene stilles til rådighed gennem public properties i Config klassen. Hele opsætningen fortages i ATM constructoren og Timeren igangsættes. Hver gang Timeren løber ud kaldes metoden \_timer\_Elapsed i ATM. 
+De nye krav dikterede at systemet skulle opsættes ved hjælp af en konfigurationsfil som skulle indlæses når systemet startede. Det er således nødvendigt at opsætte og håndtere timeren fra ATM klassen. Ved hjælp af en Config klasse indlæses konfigurationsfilen og indholdet valideres. Konfigurations parametrene stilles til rådighed gennem public properties i Config klassen. Hele opsætningen fortages i ATM constructoren og Timeren igangsættes. Hver gang Timeren løber ud kaldes metoden \_tickTimer\_Elapsed i ATM. 
 
-Der introduceres et nyt Event koncept, for nemmere at kunne tilføje nye typer af events. Disse events 
+\figur{sd_timer_elapsed}{Sekvensdiagram for ATM.\_tickTimer\_Elapsed kald}{fig:sd_timer_elapsed}{1}
 
-\figur{sd_timer_elapsed}{Sekvensdiagram for ATM.\_ticktimer\_Elapsed kald}{fig:sd_timer_elapsed}{1}
+Figur \ref{fig:sd_timer_elapsed} viser implementeringen af \_tickTimer\_Elapsed som kaldes når Timer Elapsed eventet skal håndteres. Tre store ændringer i designet blev implementeret for bedre at kunne imødekomme tilføjelser af nye events og typer af enheder som skal håndteres. Open Close princippet har været i fokus ved udformningen af den nye ATM og Event håndteringen.
+En liste af EventDetectors som hver især implementere muligheden for at generere en type af events tilføjes til en liste som injectes i RegionEventDetectoren ved oprettelse. RegionEventDetectorens opgave bliver således at gennemløbe listen af EventDetectors og kalde deres Detect metode med listen af RegionElements som parameter.
 
-RegionElements
-Configfile
-IEvents
-EventDetectors
+RegionElements blev oprettet som en parentclass til Track og Airport. Dette muliggør at en liste af RegionElements kan sendes til EventDectectorne. Hvis der tilføjes nye typer af elementer skal disse arve fra samme basisklasse og kan således sendes via de eksisterende interfaces i designet. Alle RegionElements har en position, id og altitude. Tracks og Airsports implementere yderligere nødvendige properties. Liskovs substitusions princip er medtænkt i denne løsning.
+Open close princippet er medtænkt i heleløsningen. Det er til enhver tid muligt at implementerer en nye Type af ITrackhandler og IRegionEventDetector i ATM'en. En ny liste af EventDetectors gør at nye events kan detekteres uden at RegionEventDetectoren skal skrives om. 
 
-\todo[inline]{Johnny}
+Håndteringen og logningen af events udføres af IEvent typer som oprettes af de respektive EventDetectors. På den måde kan nye typer af events oprettes sammen med nye IEventDetectors uden at ændre i RegionEventDetector.
 
-\todo[inline]{Johnny}
-
-\section{Unittest}
+\section{Unittesting}
 \todo[inline]{KRK}
 unit hest
 \subsection{ATM}
 \todo[inline]{KRK}
 \subsection{TrackHandler}
+
 \todo[inline]{Johnny}
 \subsection{RegionEventDetector}
 \todo[inline]{Johnny}
