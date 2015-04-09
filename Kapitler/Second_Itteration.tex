@@ -4,14 +4,18 @@
 Efter at første itteration var færdig blev et nyt sæt af krav til systemet præsenteret. På den baggrund blev systemets design opdateret således at det bedre ville kunne udviddes i fremtiden med flere ændringer af samme slags. 
 
 \section{Design og implementering}
-De nye krav dikterede at systemet skulle opsættes ved hjælp af en 
+De nye krav dikterede at systemet skulle opsættes ved hjælp af en konfigurationsfil som skulle indlæses når systemet startede. Det er således nødvendigt at opsætte og håndtere timeren fra ATM klassen. Ved hjælp af en Config klasse indlæses konfigurationsfilen og indholdet valideres. Konfigurations parametrene stilles til rådighed gennem public properties i Config klassen. Hele opsætningen fortages i ATM constructoren og Timeren igangsættes. Hver gang Timeren løber ud kaldes metoden \_timer\_Elapsed i ATM. 
+
+Der introduceres et nyt Event koncept, for nemmere at kunne tilføje nye typer af events. Disse events 
 
 \figur{sd_timer_elapsed}{Sekvensdiagram for ATM.\_ticktimer\_Elapsed kald}{fig:sd_timer_elapsed}{1}
 
-*RegionElements
-*Configfile
-*IEvents
-*EventDetectors
+RegionElements
+Configfile
+IEvents
+EventDetectors
+
+\todo[inline]{Johnny}
 
 \todo[inline]{Johnny}
 
