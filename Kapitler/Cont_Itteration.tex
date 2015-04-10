@@ -3,13 +3,16 @@
 \label{chp:contintegration}
 
 \section{Versionstyring}
-\todo[inline]{KRK}
+Versionsstyringsværktøjet Git og tilhørende Git server gjorde det muligt, for hvert gruppemedlem at arbejde individuelt med en del af opgaven. Ved afsluttet delopgave blev dette tilføjet til det samlede projekt på Git serveren. De andre gruppemedlemmer skulle pulle og merge deres arbejde med den nyeste udgave a projektet inden deres eget arbejde kunne pushes til serveren. Der kunne til tider opstå merge conficts hvilket resulterede i lidt ekstra arbejde, men da versionsstyring og mergetools er tilgængelig blev disse problemer let løst. Selv om det er muligt, at arbejde på separate brances blev dette ikke særlig aktuelt, da de enkelte arbejdsopgaver ikke var bredtfavnende.   
+
 \section{Buildserver}
-\todo[inline]{KRK}
+Jenkins er benyttet som buildserver til at udelukke alle lokale indspillende faktorer ved compiling af projektet. Jenkins er linket op mod gruppens Git repository og bygger den seneste udgave af projektet hver gang der pushes til branchen master. Efter projektet er blevet bygget af Jenkins rapporterers der tilbage om projektet kunne compiles eller ej. Udfaldet bliver lagt i en byggehistorik, hvor det også er muligt at se detaljer om tidligere byg. Alle medlemmer af gruppen fik garanteret, at deres tilføjelser til det samlede projekt ikke spolerede udviklingsarbejdet hos de andre i gruppen når der skulle pulles og merges. Endvidere gjorde to plugins til DotCover og NUnit det muligt, at se om alle tests og codecoverage var som forventet.
+
 \subsection{DotCover}
 Dot cover er en statisk kodeanalyse værktøj der analyserer hvor mange linjer kode vi tester.  Det er muligt at ekskludere code der ikke skal tages med i analysen. Det kan være klasser, moduler eller funktioner. Vi har besluttet at code coveres skal være 100 \%, det betyder dog ikke at vi kan være sikre på at kode er testet, men blot at alle linjer kode har været berørt af vores unit test. Det vil sige at det ikke er funktionaliteten der er testet.
+
 \subsection{NUnit}
-\todo[inline]{KRK - Screenshot graph}
+NUnit er et open source testing framework for udvikling af projekter i .Net. Alle unittests er baseret på NUnit konventioner og gruppen benyttede sig af dette til at teste klasser og underliggende metoder. Disse tests blev også eksekveret på Jenkis serveren, og resultatet der fra vist på projektets forside.
 
 %\section{Strategi}
 %Fra start var gruppen enig om at dele sig ud i 2 par og arbejde i pair programming. På den måde kunne der arbejdes på to dele af designet på en gang. Kvaliteten blev dermed højnet af at der var fire øjne på skærmen, mens der blev programmeret og taget beslutninger herom.\newline
