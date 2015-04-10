@@ -2,56 +2,40 @@
 
 % Vi benytter 2 sidet, a4 størrelse og dansk sprog. 
 \documentclass[11pt,a4paper,oneside,danish]{memoir}
-
 \usepackage[paper=A4,pagesize]{typearea}
-   
-\usepackage[utf8]{inputenc} % danske tegn
-\usepackage[danish]{babel} % dansk sprogpakke
+ \usepackage[utf8]{inputenc} % danske tegn
 
-% Hvis engelsk sprog ønsked uncomment denne
+% Choose language by uncommenting danish or english
+\usepackage[danish]{babel} % dansk sprogpakke
 % \usepackage[english]{babel}
 
-%%% % % % % % % PAKKER % % % % % % % % % % % % % % % % % % % % % % % 
-     % % % % %
-     %Pakker til fonts, farver, referencer og ligenende er placeret relevant sted i dokumentet.
+
+%% Pakker til fonts, farver, referencer og ligenende er placeret relevant sted i dokumentet.
      
-     % Her findes generelle pakker som bruges overordnet i dokumentet % 
+     %% FONT
+     \usepackage[default,osfigures,scale=0.95]{opensans} % Alternatively use the option 'defaultsans' instead of 'default' to replace the sans serif font only.
+     \usepackage[T1]{fontenc}
+     
+     % Common packages 
      \usepackage{footnote} % Package used to controle footnote(specially in tables etc.)
      \usepackage{amsmath}
      \usepackage{slantsc}
-     
-        %  \usepackage{float} % http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
-                 \usepackage{multirow} %sammenfletning af r�kker
-                % \usepackage{subfig}
-                 \usepackage{longtable} % tabeller der g�r over flere r
-                  \usepackage{geometry}
-         \usepackage[section]{placeins} %Gør det muligt at bruge \FloatBarrier
-   
-    
-    \usepackage[compatibility=false]{caption}
-    \captionsetup{font=small,labelfont=bf,textfont=it}
-    \usepackage{graphicx}
-    
-    \usepackage{afterpage}
-    
-    \usepackage[draft]{fixme} %hvor 'options' bl.a. inkluderer final, draft, danish, inline og margin
-    
-   %\usepackage[pdftex,plainpages=false,pdfpagelabels,colorlinks=true,citecolor=black,linkcolor=black,breaklinks]{hyperref}
-   
- 	\usepackage{rotating}
-   
-   \usepackage{eso-pic} % til inds�ttelse af forside.
-   % \usepackage{clock} % Til at lave et sejt anaogt ur 
+     \usepackage{multirow} % Merge table rows
+     \usepackage{longtable} % Table that can span multiple pages
+     \usepackage{geometry}
+     \usepackage[section]{placeins} % \FloatBarrier
+     \usepackage[compatibility=false]{caption}
+     \captionsetup{font=small,labelfont=bf,textfont=it}
+     \usepackage{graphicx}
+     \usepackage{afterpage}
+     \usepackage[draft]{fixme} %hvor 'options' bl.a. inkluderer final, draft, danish, inline og margin
+     \usepackage{rotating}
+     \usepackage{eso-pic} % til inds�ttelse af forside.
+     \usepackage{rotating} % rotate stuff(EVERYTHING!11)
 
-   \usepackage{rotating} % rotate stuff(EVERYTHING!11)
-   %\usepackage{lipsum}  % Use \lipsum to generate Lorem Ipsum text.
-      
-
-% % % % % % % % % % % % % % % MATH STUFF % % % % % % % % % % % % % %
+	% % MATH STUFF 
     %\usepackage{algorithmic}
-
     %\usepackage{harpoon} %Tilf�jer harpun-pile over st�rrelser i math, m.m.
- 
     %\usepackage{pst-plot} % For axes   
     %\usepackage{breqn}
     %\usepackage{fourier}  %................... Roman+math - Utopia
@@ -112,9 +96,7 @@
     \fixthelayout
     \baselineskip \topskip
 
-% % % % % % % % % % % % % % % % % % % %***** % % % % % % % % % % % % % % % % % % % % % % % % %
-
-%BibTex ops�tning
+%BibTex setup
 \usepackage[semicolon,authoryear,square]{natbib}
 
 \bibliographystyle{plainnat}
@@ -138,12 +120,9 @@
 
 %\usepackage{showlabels}
 
-
 % footruleskip is allready defined in memoir, so we have to undefine it, in order to include fancyhdr for our footer and header.
 \let\footruleskip\undefined
 \usepackage{fancyhdr}% For making fancy headers http://ctan.org/pkg/fancyhdr
-
-
 
 \AtBeginDocument{\renewcommand\contentsname{Indholdsfortegnelse}}
 
@@ -166,7 +145,6 @@
 \input{Kapitler/Second_Itteration}
 \input{Kapitler/Cont_Itteration}
 \input{Kapitler/Konklusion}
-
 
 %\bibliographystyle{plainnat}
 %\bibliography{bibliografi}% Selects .bib file AND prints bibliography
