@@ -12,8 +12,8 @@ Figur \ref{fig:sd_timer_elapsed} viser implementeringen af \_tickTimer\_Elapsed 
 En liste af EventDetectors som hver især implementerer muligheden for at generere en type af events tilføjes til en liste som injectes i RegionEventDetectoren ved oprettelse. RegionEventDetectorens opgave bliver således at gennemløbe listen af EventDetectors og kalde deres Detect metode med listen af RegionElements som parameter.
 
 RegionElements blev oprettet som en parentclass til Track og Airport. Dette muliggør, at en liste af RegionElements kan sendes til EventDectectorne. Hvis der tilføjes nye typer af elementer skal disse nedarve fra samme basisklasse og kan således sendes via de eksisterende interfaces i designet. Alle RegionElements har en position, id og altitude. Tracks og Airsports implementere yderligere nødvendige properties. Liskovs substitusions princip er medtænkt i denne løsning.
-Open close princippet er medtænkt i heleløsningen. Det er til enhver tid muligt at implementerer en nye Type af ITrackhandler og IRegionEventDetector i ATM'en. En ny liste af EventDetectors gør at nye events kan detekteres uden at RegionEventDetectoren skal skrives om. 
-dfsdfsd 
+Open close princippet er medtænkt i heleløsningen. Det er til enhver tid muligt at implementerer en nye Type af ITrackhandler og IRegionEventDetector i ATM'en. En ny liste af EventDetectors gør at nye events kan detekteres uden at RegionEventDetectoren skal skrives om.
+
 Håndteringen og logningen af events udføres af IEvent typer som oprettes af de respektive EventDetectors. På den måde kan nye typer af events oprettes sammen med nye IEventDetectors uden at ændre i RegionEventDetector.
 
 \section{Unittesting}
@@ -23,10 +23,11 @@ Formålet med unittesting er, at sikre de enkelte enheder fungerer individuelt s
 Ved oprettelse af et objekt af ATM klassen er interfaces af TrackHandler og ConfigReader constructor injected. Dette muliggør let udvidelse af blandt andet måden en konfigurationsfil indlæses på, men giver også mere indrammende unittesting. Den store fordel er, at der kan testes på om de RegionElements der bliver tilføjet i AddTrack() tilsvarer dem som bliver sendt til TrackHandler. Desværre er tests som denne afhængig af mere end et metodekald, og en denne test fejlede er det sværere at bestemme hvor fejlen befinder sig.
 
 \subsection{TrackHandler}
+Trackhandleren modtager en liste af Tracks som den opdatere positionen på ift. hastighed, position og tidsstempler. Der blev testet at klassen håndterede null parametre. Metoden Updatepositions står for alt funktionaliteten runtime. Det blev testet at metoden håndterede null lister samt lister uden tracks. Herefter blev det testet at metoden kunne håndtere en hvilken som helt tidsstempel og at tracksenes position ikke blev opdateret første gang hvor der ikke var noget tidsstempel at beregne tidsforskel ift. Til sidst blev det testet at metoden opdaterer tracksenes position korrekt ved at lave 4 test med tracks som flyver mod hver sit verdenshjørne.
 
-\todo[inline]{Johnny}
 \subsection{RegionEventDetector}
-\todo[inline]{Johnny}
+RegionEventDetector klassen bliver oprettet med en liste af EventDetectors som hver især skal have tidsstemplet og en liste af samtlige RegionElements som de kan detektere events ud fra. Metodens constructor blev testet for håndtering af null parametre og tomme lister af EventDetector. Herefter blev det testet om RegionEventDetectoren returnere de korrekte events som EventDetectorne returnerer.  
+
 \subsection{EventDetectors}
 EventsDectors klasserne er testet med forskellige senarier og har været med til at finde fejl i vores implementering. Det er test der har givet os et godt udbytte. Vi har dog erkendt at vi burde have implementeret beregningen af afstanden mellem de forskellige regionselementer i en særskilt klasse således at den kun skal testes et sted. Implementeringen i dag gør det rigtig svært at test selve afstandsberegningen og det giver også mange ens unit test, da vi skal teste den i 5 events detektor klasser. Ved at have beregningen i en klasse for sig selv, kan vi påvirke vores unit test af detektor klasserne med en Stub af beregningsklassen og derved bestemme hvornår der skal generes events.
 
@@ -39,9 +40,9 @@ WriteOutput klasserne som skriver til konsollen, logfilen eller begge er eksklud
 RegionsElements er også ekskluderet da det er get og set funktioner der kan testes, men dette har vi valgt ikke at gøre.
 
 \section{Integrationstest}
-\todo[inline]{Johnny}
+Til integrationstest blev det valgt at anvende en bottom-up tilgang, hvor grænsefladen til filestream først skulle sikre at WriteOutput kunne skrive til en logfil. Konsol outputtet havde vi nogen plan for at teste integrationene med. Grænsefladen med JSON serializer og deserialize af config filen skulle testes på samme måde. Herefter skulle samtlige lag testes og resultatet valideres ved at se på outputtet i logfilerne. Planen for integrationstest er ikke blevet implementeret.
 
-%
+
 %\section{Teststrategi}
 %Gruppen valgte at enhedsteste hver metode så snart den var blevet skrevet. Dette sikrede for det første, at der let kunne holde en coverage nær 100\%, da der blot blev sørget for at få fuld coverage hver eneste gang en ny metode var oprettet. Dette gav en god sikkerhedsfølelse da man da altid kunne stole på, at enhederne virkede i en individuel sammenhæng, og at der derfor ikke var langt til en fungerende integration.  Det gav samtidig en rigtig god afveksling mellem udvikling og test, så arbejdet ikke blev for monotomt. 
 %Da enhederne i bunden af hierakiet var blevet testet, påbegyndte vi integrationstest nedefra og op, og til sidst blev hele systemet testet i en afsluttende "big bang" integration.
