@@ -1,5 +1,5 @@
 \thispagestyle{fancy}
-\chapter{Første itteration}
+\chapter{Første tteration}
 \label{chp:FirstItteration}
 
 \section{Design og implementering}
@@ -7,7 +7,7 @@
 
 \figur{sd_tick_firstitteration}{Sekvensdiagram for ATM.Tick kald}{fig:sd_tick_first}{1}
 
-Første itteration af ATM systemet havde en klasse kaldet ATM. ATM klassen havde to metoder; Tick og AddTrack. AddTrack tog en Liste af Tracks som parameter og tilføjede disse Tracks til listen af Tracks som ATM klassen skulle håndtere. 
+Første iteration af ATM systemet havde en klasse kaldet ATM. ATM klassen havde to metoder Tick og AddTrack. AddTrack tog en Liste af Tracks som parameter og tilføjede disse Tracks til listen af Tracks som ATM klassen skulle håndtere. 
 
 Et objekt af ATM blev oprettet sammen med en Timer i programmets main metode. Timeren blev sat til et interval på 250ms med en delegate som kaldte Tick hver gang Timeren udløb. Implementeringen af Tick metoden kan ses som et sekvensdiagram i figur \ref{fig:sd_tick_first}. Figuren viser hvordan at Tick Kalder UpdatePositions i TrackHandler med listen af vores tracks. UpdatePositions opdatere Tracksenes position baseret på hastighed, position og tidspunkt. Herefter sender Tick den opdaterede liste til RegionHandleren ved at kalde metodens UpdateRegion metode. UpdateRegion identificerer, håndterer og logger events ved hjælp af EventLoggeren. EventLoggeren har en metode for hver type af event som skal logges.
 
